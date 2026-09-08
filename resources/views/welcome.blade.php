@@ -1,24 +1,14 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<x-head site_name="Home" />
+<body>
+    <x-header />
+    <main>
+        <h1>Welcome to the Auction House</h1>
+        <p>Discover and bid on amazing vehicles!</p>
+    </main>
+    <x-footer />
+</body>
 
-        @fonts
-
-        <!-- Styles / Scripts -->
-        {{-- @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-            @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @else
-            <link rel="stylesheet" href="resources\css\app.css">
-        @endif --}}
-        <link rel="stylesheet" href=" {{ asset('css/app.css') }}">
-    </head>
-    <body>
-        <x-header/>
-        <main></main>
-        <x-footer/>
-    </body>
 </html>
