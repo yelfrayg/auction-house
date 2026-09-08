@@ -8,45 +8,23 @@
         <h1>Live Auctions</h1>
 
         <div class="auctions-container">
-            <a href="/auction/1" class="auction-item">
-                <div class="auction-image-container">
-                    <img src="{{ asset('img/250swb.png') }}" alt="Auction Item">
-                    <div class="auction-info">
-                        <p class="time-info"><span class="time-value">30:34</span></p>
-                        <p class="bid-info"><span class="bid-value">2.000.000€</span></p>
-                    </div>
-                </div>
-            </a>
-
-            <div class="auction-item">
-                <div class="auction-image-container">
-                    <img src="{{ asset('img/e-type.png') }}" alt="Auction Item">
-                    <div class="auction-info">
-                        <p class="time-info"><span class="time-value">30:34</span></p>
-                        <p class="bid-info"><span class="bid-value">135.000€</span></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="auction-item">
-                <div class="auction-image-container">
-                    <img src="{{ asset('img/911.png') }}" alt="Auction Item">
-                    <div class="auction-info">
-                        <p class="time-info"><span class="time-value">30:34</span></p>
-                        <p class="bid-info"><span class="bid-value">200.000€</span></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="auction-item">
-                <div class="auction-image-container">
-                    <img src="{{ asset('img/long-bloc.png') }}" alt="Auction Item">
-                    <div class="auction-info">
-                        <p class="time-info"><span class="time-value">30:34</span></p>
-                        <p class="bid-info"><span class="bid-value">1.300€</span></p>
-                    </div>
-                </div>
-            </div>
+            @isset($items)
+                @foreach ($items as $item)
+                    <a href="/auction/{{ $item->id }}" class="auction-item">
+                        <div class="auction-image-container">
+                            <img src="{{ asset($item->item_image_url) }}" alt="{{ $item->item_name }}">
+                            <div class="auction-info">
+                                <p class="time-info">
+                                    <span class="time-value" data-end-time="{{ $item->item_end_time->toIso8601String() }}">
+                                        {{ $item->item_end_time->isPast() ? 'Auction Ended' : 'Loading...' }}
+                                    </span>
+                                </p>
+                                <p class="bid-info"><span class="bid-value">{{ number_format($item->item_highest_bid, 0) }} €</span></p>
+                            </div>
+                        </div>
+                    </a>
+                @endforeach
+            @endisset
         </div>
     </main>
     <x-footer />

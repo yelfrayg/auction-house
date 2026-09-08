@@ -6,7 +6,7 @@
     <x-header />
     <main>
         @isset($auction)
-            <pre>{{ json_encode($auction['description'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) }}</pre>
+            <pre>{{ json_encode($auction->item_description, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) }}</pre>
         @else
             <p>Auction not found.</p>
         @endisset

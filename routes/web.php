@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Item;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -7,24 +8,11 @@ Route::get('/', function () {
 });
 
 Route::get('/live-auctions', function () {
-    return view('live-auctions');
+    $items = Item::allItems();
+    return view('live-auctions', ['items' => $items]);
 });
 
 Route::get('/auction/{slotId}', function ($slotId) {
-    $auction = [
-        'id' => $slotId,
-        'description' => 'Description for Auction 1',
-        'product' => [
-            'id' => 1,
-            'name' => 'Product 1',
-            'description' => 'Description for Product 1',
-        ],
-        'seller' => [
-            'id' => 1,
-            'name' => 'Seller 1',
-            'description' => 'Description for Seller 1',
-        ],
-        'end_time' => now()->addMinutes(10),
-    ];
+    $auction = Item::getItemById($slotId);
     return view('auction', ['auction' => $auction]);
 });
