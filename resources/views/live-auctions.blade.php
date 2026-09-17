@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<x-head site_name="Live Auctions" />
-
+<x-head site_name="Live Auctions" :js_files="[resources/js/auctionStream.js]"/>
 <body>
     <x-header />
     <main>
@@ -16,14 +15,18 @@
                             <div class="auction-info">
                                 <p class="time-info">
                                     <span class="time-value" data-end-time="{{ $item->item_end_time->toIso8601String() }}">
-                                        {{ $item->item_end_time->isPast() ? 'Auction Ended' : 'Loading...' }}
+                                        {{ $item->item_end_time->diffForHumans() }}
                                     </span>
                                 </p>
-                                <p class="bid-info"><span class="bid-value">{{ number_format($item->item_highest_bid, 0) }} €</span></p>
+                                <p class="bid-info">
+                                    <span class="bid-value">{{ number_format($item->item_highest_bid, 0) }}€</span>
+                                </p>
                             </div>
                         </div>
                     </a>
                 @endforeach
+            @else
+                <p>No live auctions available.</p>
             @endisset
         </div>
     </main>

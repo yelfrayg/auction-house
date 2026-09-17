@@ -1,11 +1,15 @@
 @import "header.css";
 @import "index.css";
+@import "auction-item.css";
+@import "footer.css";
+@import "auth.css";
 
 :root {
     --color-bg: #16232a;
     --color-highlight: #ff5b04;
 
     --color-text: #E4EEF0;
+    --color-text-secondary: #A0B1B9;
     --color-border: #053350;
 
     --color-warning: #ff4d6d;

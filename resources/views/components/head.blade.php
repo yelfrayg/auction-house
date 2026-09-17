@@ -1,4 +1,4 @@
-@props(['site_name'])
+@props(['site_name', "js_files" => []])
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,5 +7,5 @@
 
     @fonts
     <!-- Styles / Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(array_merge(['resources/css/app.css', 'resources/js/app.js'], $js_files))
 </head>
