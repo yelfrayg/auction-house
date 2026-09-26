@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<x-head site_name="Live Auctions" :js_files="[resources/js/auctionStream.js]"/>
+<x-head site_name="Live Auctions" :js_files="['resources/js/auctionStream.js']"/>
 <body>
     <x-header />
     <main>
@@ -26,7 +26,7 @@
                     </a>
                 @endforeach
             @else
-                <p>No live auctions available.</p>
+                <p>Currently no live auctions available.</p>
             @endisset
         </div>
     </main>

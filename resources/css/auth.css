@@ -57,11 +57,11 @@
                     background-color: transparent;
                     color: var(--color-text-secondary);
                     border-radius: 0;
-                    border-bottom: 1px solid var(--color-text-secondary);
+                    transition: color 0.2s ease;
 
                     &:hover {
                         color: var(--color-text);
-                        border-bottom: 1px solid var(--color-text);
+                        transition: color 0.2s ease;
                     }
                 }
             }

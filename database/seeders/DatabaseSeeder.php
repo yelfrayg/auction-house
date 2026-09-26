@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Item;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -10,9 +11,6 @@ class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
 
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
 
@@ -31,12 +29,12 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'item_name' => 'Porsche 911 S/T',
-                'item_description' => 'This Porsche 911 S/T is a rare and highly sought-after car, known for its exceptional performance and iconic design.',
+                'item_description' => 'This Porsche 911 S/T is a rare and highly specified car, known for its exceptional performance and iconic design.',
                 'item_image_url' => 'img/911.png',
                 'item_min_price' => 100_000.00,
                 'item_highest_bid' => 1_000_000.00,
                 'item_start_time' => now(),
-                'item_end_time' => now()->addMinutes(17),
+                'item_end_time' => now()->addSeconds(170),
             ],
             [
                 'item_name' => 'Hot Wheels 1:64',
@@ -45,7 +43,7 @@ class DatabaseSeeder extends Seeder
                 'item_min_price' => 10.00,
                 'item_highest_bid' => 100.00,
                 'item_start_time' => now(),
-                'item_end_time' => now()->addDays(3),
+                'item_end_time' => now()->addDays(10),
             ]
         ];
 

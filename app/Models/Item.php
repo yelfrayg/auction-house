@@ -32,4 +32,15 @@ class Item extends Model
     {
         return self::find($id);
     }
+
+    public static function updateHighestBid($id, $newBid)
+    {
+        $item = self::find($id);
+        if ($item) {
+            $item->item_highest_bid = $newBid;
+            $item->save();
+            return true;
+        }
+        return false;
+    }
 }
