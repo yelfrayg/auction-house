@@ -42,19 +42,19 @@ Route::get('/userAuth', function () {
 
 Route::post('/register', [UserController::class, 'store'])->name('register');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard')->middleware('auth');
-
 Route::post('/login', function () {
     $credentials = request()->validate([
         'email' => ['required', 'email'],
         'password' => ['required'],
+    ], [
+        'email.required' => 'Email is required.',
+        'email.email' => 'Please provide a valid email address.',
+        'password.required' => 'Password is required.',
     ]);
 
     if (auth()->attempt($credentials)) {
         request()->session()->regenerate();
-        return redirect()->intended('/dashboard')->withCookie(cookie('userId', auth()->id(), 60 * 24 * 30))->with('success', 'Logged in successfully.'); // Cookie for 30 days
+        return redirect()->intended('/account')->withCookie(cookie('userId', auth()->id(), 60 * 24 * 30))->with('success', 'Logged in successfully.'); // Cookie for 30 days
     }
 
     return back()->withErrors([
@@ -68,12 +68,12 @@ Route::middleware('auth')->group(function () {
         Auth::logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
-        return back()->with('success', 'Logged out successfully.'); // Delete cookie
+        return back()->with('success', 'Logged out successfully.');
     })->name('logout');
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/account', function () {
+        return view('account', ['user' => auth()->user()]);
+    })->name('account');
 
     Route::post('/auction/{slotId}/bid', function ($slotId) {
         // 1. Preis updaten

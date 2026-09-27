@@ -1,0 +1,192 @@
+body {
+	min-height: 100vh;
+}
+
+.dashboard {
+	width: min(1100px, calc(100% - 3rem));
+	margin: 0 auto;
+	padding: 3.5rem 0 8rem;
+}
+
+.dashboard-heading,
+.panel-heading {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 1.5rem;
+}
+
+.dashboard-heading {
+	margin-bottom: 2rem;
+}
+
+.dashboard h1,
+.dashboard h2,
+.dashboard h3 {
+	color: var(--color-text);
+}
+
+.dashboard h1 {
+	font-size: clamp(2rem, 4vw, 3.25rem);
+	line-height: 1.1;
+}
+
+.dashboard h2 {
+	font-size: 1.45rem;
+	margin-bottom: 1.5rem;
+}
+
+.eyebrow {
+	color: var(--color-highlight);
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	margin-bottom: 0.65rem;
+	text-transform: uppercase;
+}
+
+.dashboard-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+	gap: 1rem;
+}
+
+.dashboard-panel {
+	background: color-mix(in srgb, var(--color-bg) 88%, white);
+	border: 1px solid var(--color-border);
+	border-radius: 8px;
+	padding: 1.5rem;
+}
+
+.auctions,
+.user-section {
+	grid-column: span 2;
+}
+
+.user-info dl {
+	display: grid;
+	gap: 1rem;
+}
+
+.user-info dl div {
+	border-bottom: 1px solid var(--color-border);
+	padding-bottom: 1rem;
+}
+
+.user-info dt {
+	color: var(--color-text-secondary);
+	font-size: 0.85rem;
+	margin-bottom: 0.35rem;
+}
+
+.user-info dd {
+	font-size: 1.05rem;
+	overflow-wrap: anywhere;
+}
+
+.auction-columns {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 2rem;
+}
+
+.auction-list h3 {
+	font-size: 1rem;
+	margin-bottom: 0.75rem;
+}
+
+.auction-list ul {
+	display: grid;
+	gap: 0.5rem;
+	list-style: none;
+}
+
+.auction-list li {
+	background: var(--color-bg);
+	border-left: 3px solid var(--color-highlight);
+	padding: 0.75rem 1rem;
+}
+
+.user-section form {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 0.65rem 1rem;
+}
+
+.user-section label {
+	color: var(--color-text-secondary);
+	font-size: 0.85rem;
+}
+
+.user-section input {
+	width: 100%;
+	box-sizing: border-box;
+	background: var(--color-bg);
+	border: 1px solid var(--color-border);
+	border-radius: 4px;
+	color: var(--color-text);
+	padding: 0.75rem 0.9rem;
+}
+
+.user-section input:focus {
+	border-color: var(--color-highlight);
+	outline: none;
+}
+
+.button {
+	border: 0;
+	border-radius: 4px;
+	background: var(--color-highlight);
+	color: var(--color-text);
+	cursor: pointer;
+	font: inherit;
+	padding: 0.7rem 1.1rem;
+}
+
+.button-secondary {
+	background: transparent;
+	border: 1px solid var(--color-border);
+}
+
+.button:hover:not(:disabled) {
+	filter: brightness(1.1);
+}
+
+.button:disabled {
+	background: var(--color-border);
+	cursor: not-allowed;
+}
+
+.user-section .button {
+	grid-column: 1 / -1;
+	justify-self: start;
+	margin-top: 0.5rem;
+}
+
+@media (max-width: 700px) {
+	.dashboard {
+		width: min(100% - 2rem, 540px);
+		padding-top: 2rem;
+	}
+
+	.dashboard-heading {
+		align-items: stretch;
+		flex-direction: column;
+	}
+
+	.dashboard-grid,
+	.auction-columns,
+	.user-section form {
+		grid-template-columns: 1fr;
+	}
+
+	.auctions,
+	.user-section {
+		grid-column: auto;
+	}
+
+	.dashboard-heading .button {
+		width: 100%;
+	}
+}
+

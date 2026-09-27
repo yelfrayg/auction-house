@@ -13,7 +13,8 @@
                         <input type="email" name="email" placeholder="Email" required>
                         <input type="password" name="password" placeholder="Password" required>
                         <button type="submit" disabled>Login</button>
-                        <button type="button" class="btn-alternative" id="show-register">I don't have an account.</button>
+                        <button type="button" class="btn-alternative" id="show-register">I don't have an
+                            account.</button>
                     </form>
                 </div>
             </div>
@@ -34,6 +35,18 @@
                 </div>
             </div>
         </div>
+
+        @if (isset($errors) && $errors->any())
+            <aside>
+                <div class="error-messages">
+                    <ul class="error-list">
+                        @foreach ($errors->all() as $error)
+                            <li class="error-item"><p class="error-text">{{ $error }}</p><span class="close">X</span></li>
+                        @endforeach
+                    </ul>
+                </div>
+            </aside>
+        @endif
         <x-footer />
 </body>
 

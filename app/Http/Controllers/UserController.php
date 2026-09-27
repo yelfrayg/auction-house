@@ -25,7 +25,7 @@ class UserController extends Controller
                 'email.email' => 'Please provide a valid email address.',
                 'email.unique' => 'This email is already registered.',
                 'password.required' => 'Password is required.',
-                'password.min' => 'Password must be at least 1 character long.',
+                'password.min' => 'Password must be at least be 1 character long.',
             ]
         );
 

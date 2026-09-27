@@ -3,6 +3,7 @@
 @import "auction-item.css";
 @import "footer.css";
 @import "auth.css";
+@import "dashboard.css";
 
 :root {
     --color-bg: #16232a;
@@ -23,6 +24,13 @@
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     background-color: var(--color-bg);
     color: var(--color-text);
+}
+
+main {
+    flex: 1;
 }
