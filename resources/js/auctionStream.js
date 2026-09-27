@@ -1,5 +1,18 @@
 const remainingTime = document.querySelector('.auction-end-time');
+const titleViewport = document.querySelector('.auction-title-viewport');
 let timerInterval;
+
+const updateTitleOverflow = () => {
+    if (!titleViewport) {
+        return;
+    }
+
+    const title = titleViewport.querySelector('.auction-h1');
+    titleViewport.classList.toggle('is-overflowing', title.scrollWidth > titleViewport.clientWidth);
+};
+
+updateTitleOverflow();
+window.addEventListener('resize', updateTitleOverflow);
 
 const updateRemainingTime = () => {
     const endTime = new Date(remainingTime.dataset.endTime);

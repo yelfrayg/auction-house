@@ -7,7 +7,7 @@
     <main>
         @isset($auction)
             {{-- <pre>{{ json_encode($auction->item_description, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) }}</pre> --}}
-            <div class="container">
+            <div class="auction-container">
                 <div class="imgcontainer">
                     <img src="{{ asset($auction['item_image_url']) }}" alt="{{ $auction['item_name'] }}">
                     <section class="number-details">
@@ -21,16 +21,31 @@
                     </section>
                 </div>
                 <div class="auction-info">
-                    <p class="auction-lot">Auction Lot: {{ $auction['id'] }}</p>
-                    <h1 class="auction-h1">{{ $auction['item_name'] }}</h1>
-                    <p class="auction-description">{{ $auction['item_description'] }}</p>
+                    <div class="auction-info-wrapper">
+                        <p class="auction-lot"># {{ $auction['id'] }}</p>
+                        <div class="auction-title-viewport">
+                            <h1 class="auction-h1" data-title="{{ $auction['item_name'] }}">{{ $auction['item_name'] }}</h1>
+                        </div>
+                        <p class="auction-description">{{ $auction['item_description'] }}</p>
+                        @if (isset($currentWinner))
+                            <p class="auction-winner">Current Winner: {{ $currentWinner->name }}</p>
+                        @endif
+                    </div>
+
                     <div class="buttons">
                         <form action="/auction/{{ $auction['id'] }}/bid" method="POST">
                             @csrf
-                            <input type="number" name="bid_amount" min="{{ $auction['item_highest_bid'] + 1 }}"
-                                placeholder="Enter your bid" required>
-                            <button type="submit">Place Bid</button>
+                            @if (date('c', strtotime($auction['item_end_time'])) < date('c'))
+                                <input type="text" name="bid_amount" value="Winner: Testname" disabled>
+                            @else
+                                <input type="number" name="bid_amount" min="{{ $auction['item_highest_bid'] + 1 }}"
+                                    placeholder="Enter your bid" required>
+                                <button type="submit">Place Bid</button>
+                            @endif
                         </form>
+                        @if (isset($success))
+                            <p class="success-message">{{ $success }}</p>
+                        @endif
                     </div>
                 </div>
             </div>

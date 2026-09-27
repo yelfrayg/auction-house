@@ -3,9 +3,9 @@ body {
 }
 
 .dashboard {
-	width: min(1100px, calc(100% - 3rem));
+	width: 75%;
 	margin: 0 auto;
-	padding: 3.5rem 0 8rem;
+    padding-top: 3rem;
 }
 
 .dashboard-heading,
@@ -29,6 +29,7 @@ body {
 .dashboard h1 {
 	font-size: clamp(2rem, 4vw, 3.25rem);
 	line-height: 1.1;
+    padding-left: 0;
 }
 
 .dashboard h2 {
@@ -40,19 +41,19 @@ body {
 	color: var(--color-highlight);
 	font-size: 0.75rem;
 	font-weight: 700;
-	letter-spacing: 0.08em;
-	margin-bottom: 0.65rem;
+	letter-spacing: 0.1rem;
+	margin-bottom: 0.5rem;
 	text-transform: uppercase;
 }
 
 .dashboard-grid {
 	display: grid;
-	grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 	gap: 1rem;
 }
 
 .dashboard-panel {
-	background: color-mix(in srgb, var(--color-bg) 88%, white);
+	background-color: var(--color-bg-light);
 	border: 1px solid var(--color-border);
 	border-radius: 8px;
 	padding: 1.5rem;
@@ -105,6 +106,13 @@ body {
 	background: var(--color-bg);
 	border-left: 3px solid var(--color-highlight);
 	padding: 0.75rem 1rem;
+    transition: background-color 0.3s, border-left-width 0.3s;
+
+    &:hover {
+        background-color: var(--color-bg-light);
+        border-left-width: 10px;
+        transition: background-color 0.3s, border-left-width 0.3s;
+    }
 }
 
 .user-section form {
@@ -141,11 +149,29 @@ body {
 	cursor: pointer;
 	font: inherit;
 	padding: 0.7rem 1.1rem;
+    transition: all 0.3s;
 }
 
-.button-secondary {
-	background: transparent;
+.button-secondary, .button.delete {
+	background-color: var(--color-bg);
 	border: 1px solid var(--color-border);
+    color: var(--color-text);
+
+    &:hover {
+        background-color: var(--color-bg-light);
+    }
+}
+
+.button.delete:hover {
+    transition: background-color 0.3s, border-color 0.3s;
+    background-color: var(--color-warning);
+    border-color: var(--color-warning);
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5rem;
 }
 
 .button:hover:not(:disabled) {
@@ -153,7 +179,9 @@ body {
 }
 
 .button:disabled {
-	background: var(--color-border);
+	background-color: transparent;
+    border: 1px solid var(--color-border);
+	color: var(--color-text-secondary);
 	cursor: not-allowed;
 }
 

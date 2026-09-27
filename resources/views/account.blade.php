@@ -22,8 +22,14 @@
                     <p class="eyebrow">Your details</p>
                     <h2>User Information</h2>
                     <dl>
-                        <div><dt>Name</dt><dd>{{ $user->name }}</dd></div>
-                        <div><dt>Email</dt><dd>{{ $user->email }}</dd></div>
+                        <div>
+                            <dt>Name</dt>
+                            <dd>{{ $user->name }}</dd>
+                        </div>
+                        <div>
+                            <dt>Email</dt>
+                            <dd>{{ $user->email }}</dd>
+                        </div>
                     </dl>
                 </section>
 
@@ -37,11 +43,27 @@
                     <div class="auction-columns">
                         <div class="auction-list won-auctions">
                             <h3>Won Auctions</h3>
-                            <ul><li>Auction 1</li><li>Auction 2</li><li>Auction 3</li></ul>
+                            <ul>
+                                <li>Auction 1</li>
+                                <li>Auction 2</li>
+                                <li>Auction 3</li>
+                            </ul>
                         </div>
                         <div class="auction-list active-auctions">
                             <h3>Active Auctions</h3>
-                            <ul><li>Auction 4</li><li>Auction 5</li><li>Auction 6</li></ul>
+                            <ul>
+                                <li>Auction 4</li>
+                                <li>Auction 5</li>
+                                <li>Auction 6</li>
+                            </ul>
+                        </div>
+                        <div class="auction-list upcoming-auctions">
+                            <h3>Upcoming Auctions</h3>
+                            <ul>
+                                <li>Auction 7</li>
+                                <li>Auction 8</li>
+                                <li>Auction 9</li>
+                            </ul>
                         </div>
                     </div>
                 </section>
@@ -56,8 +78,12 @@
                         <label for="name">Name</label>
                         <input type="text" name="name" id="name" value="{{ $user->name }}" required>
                         <label for="password">New Password</label>
-                        <input type="password" name="password" id="password" placeholder="Leave blank to keep current password">
-                        <button class="button" type="submit" disabled>Update Information</button>
+                        <input type="password" name="password" id="password"
+                            placeholder="Leave blank to keep current password">
+                        <div class="button-container">
+                            <button class="button" type="submit" disabled>Update Information</button>
+                            <button class="button delete" type="reset">Delete Account</button>
+                        </div>
                     </form>
                 </section>
             </div>

@@ -35,15 +35,14 @@ class DatabaseSeeder extends Seeder
                 'item_highest_bid' => 1_000_000.00,
                 'item_start_time' => now(),
                 'item_end_time' => now()->addSeconds(170),
-            ],
-            [
-                'item_name' => 'Hot Wheels 1:64',
-                'item_description' => 'Hot Wheels 1:64 scale die-cast car.',
-                'item_image_url' => 'img/long-bloc.png',
-                'item_min_price' => 10.00,
-                'item_highest_bid' => 100.00,
+            ], [
+                'item_name' => 'Mercedes AMG GT63 S 4-Door Coupe',
+                'item_description' => 'The Mercedes AMG GT63 S 4-Door Coupe is a high-performance luxury sedan with a powerful V8 engine and advanced technology features.',
+                'item_image_url' => 'img/gt63s-4.png',
+                'item_min_price' => 60_000.00,
+                'item_highest_bid' => 60_000.00,
                 'item_start_time' => now(),
-                'item_end_time' => now()->addDays(10),
+                'item_end_time' => now()->addHours(10),
             ]
         ];
 
