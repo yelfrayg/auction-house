@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<x-head site_name="Live Auctions" :js_files="['resources/js/auctionStream.js']"/>
+<x-head site_name="Live Auctions" :js_files="['resources/js/auctionStream.js']" />
+
 <body>
     <x-header />
     <main>
@@ -9,6 +10,9 @@
         <div class="auctions-container">
             @isset($items)
                 @foreach ($items as $item)
+                    @if ($item->item_end_time < now())
+                        @continue
+                    @endif
                     <a href="/auction/{{ $item->id }}" class="auction-item">
                         <div class="auction-image-container">
                             <img src="{{ asset($item->item_image_url) }}" alt="{{ $item->item_name }}">

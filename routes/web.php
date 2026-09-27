@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Models\Item;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Hash;
 
 Route::get('/', function () {
     return view('welcome');
@@ -74,5 +75,39 @@ Route::middleware('auth')->group(function () {
             return back()->with('success', 'Your bid has been placed successfully.');
         }
         return back()->with('failure', 'Your bid has not been placed successfully.');
+    });
+
+    Route::post('/account/delete', function () {
+        $user = auth()->user();
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        $user->delete();
+
+        return redirect('/')->with('success', 'Your account has been deleted successfully.');
+    })->name('account.delete');
+
+    Route::post('/account/update-user', function () {
+        $user = auth()->user();
+        $validated = request()->validate([
+            'name' => 'string|max:255',
+            'email' => 'string|email|max:255|unique:users,email,' . $user->id,
+            'password' => 'nullable|string|min:1',
+        ], [
+            'email.email' => 'Please provide a valid email address.',
+            'email.unique' => 'An account with this email is already registered.',
+            'password.min' => 'Password must be at least 1 character long.',
+        ]);
+
+        $user->name = $validated['name'] ?? $user->name;
+        $user->email = $validated['email'] ?? $user->email;
+
+        if (!empty($validated['password'])) {
+            $user->password = Hash::make($validated['password']);
+        }
+        $user->save();
+
+        return back()->with('success', 'Your account information has been updated successfully.');
     });
 });

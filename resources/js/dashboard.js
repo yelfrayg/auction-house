@@ -4,6 +4,7 @@ console.log("dashboard.js loaded");
 document.addEventListener("DOMContentLoaded", () => {
     const emailField = document.getElementById("email");
     const nameField = document.getElementById("name");
+    const passwordField = document.getElementById("password");
     const emailDefaultValue = emailField.value;
     const nameDefaultValue = nameField.value;
 
@@ -11,7 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const deleteAccountButton = document.getElementById("delete-account-button");
 
     const checkForChanges = () => {
-        if (emailField.value !== emailDefaultValue || nameField.value !== nameDefaultValue) {
+        if (
+            emailField.value !== emailDefaultValue ||
+            nameField.value !== nameDefaultValue ||
+            passwordField.value !== ""
+        ) {
             saveButton.disabled = false;
         } else {
             saveButton.disabled = true;
@@ -20,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     emailField.addEventListener("input", checkForChanges);
     nameField.addEventListener("input", checkForChanges);
+    passwordField.addEventListener("input", checkForChanges);
 
     deleteAccountButton.addEventListener("click", () => {
         if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {

@@ -36,7 +36,7 @@
                 <section class="dashboard-panel user-section">
                     <p class="eyebrow">Manage account</p>
                     <h2>Update Information</h2>
-                    <form action="/update-user" method="post">
+                    <form action="/account/update-user" method="post">
                         @csrf
                         <label for="email">Email</label>
                         <input type="email" name="email" id="email" value="{{ $user->email }}" required>

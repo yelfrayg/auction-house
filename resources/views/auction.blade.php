@@ -31,28 +31,32 @@
                     </div>
 
                     <div class="buttons">
-                        @if ($auction['user_id'])
-                            <p class="auction-winner">Current Winner: {{ $auction->user->name }}</p>
+                        @if (!date('c', strtotime($auction['item_end_time'])) >= date('c'))
+                            @if ($auction['user_id'])
+                                <p class="auction-winner">Current Winner: {{ $auction->user->name }}</p>
                             @else
-                            <p class="auction-winner">No bids yet.</p>
+                                <p class="auction-winner">No bids yet.</p>
+                            @endif
                         @endif
+
                         <form action="/auction/{{ $auction['id'] }}/bid" method="POST">
                             @csrf
                             @if (date('c', strtotime($auction['item_end_time'])) < date('c'))
-                                <input type="text" name="bid_amount" value="Winner: Testname" disabled>
+                                <input type="text" name="bid_amount" value="Winner: {{ $auction->user->name }}"
+                                    disabled>
                             @else
-                                <input type="number" name="bid_amount" min="{{ $auction['item_highest_bid'] + 1 }}"
-                                    placeholder="Enter your bid" required>
+                                <input type="number" name="bid_amount" min="{{ $auction['item_highest_bid'] + 1500 }}"
+                                    placeholder="Enter your bid" step = "1500" required>
                                 <button type="submit">Place Bid</button>
                             @endif
                         </form>
                         @if (session('success'))
                             <aside class="bid-messages success">
-                                <x-message text="{{ session('success') }}"/>
+                                <x-message text="{{ session('success') }}" />
                             </aside>
                         @elseif (session('failure'))
                             <aside class="bid-messages failure">
-                                <x-message text="{{ session('failure') }}"/>
+                                <x-message text="{{ session('failure') }}" />
                             </aside>
                         @endif
                     </div>
