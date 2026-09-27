@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<x-head site_name="Mein Account" :js_files="['resources/js/dashboard.js']" />
+<x-head site_name="My account" :js_files="['resources/js/dashboard.js']" />
 
 <body>
     <x-header />
@@ -18,7 +18,7 @@
             </div>
 
             <div class="dashboard-grid">
-                <section class="dashboard-panel user-info">
+                {{-- <section class="dashboard-panel user-info">
                     <p class="eyebrow">Your details</p>
                     <h2>User Information</h2>
                     <dl>
@@ -31,42 +31,7 @@
                             <dd>{{ $user->email }}</dd>
                         </div>
                     </dl>
-                </section>
-
-                <section class="dashboard-panel auctions">
-                    <div class="panel-heading">
-                        <div>
-                            <p class="eyebrow">Your activity</p>
-                            <h2>Auctions</h2>
-                        </div>
-                    </div>
-                    <div class="auction-columns">
-                        <div class="auction-list won-auctions">
-                            <h3>Won Auctions</h3>
-                            <ul>
-                                <li>Auction 1</li>
-                                <li>Auction 2</li>
-                                <li>Auction 3</li>
-                            </ul>
-                        </div>
-                        <div class="auction-list active-auctions">
-                            <h3>Active Auctions</h3>
-                            <ul>
-                                <li>Auction 4</li>
-                                <li>Auction 5</li>
-                                <li>Auction 6</li>
-                            </ul>
-                        </div>
-                        <div class="auction-list upcoming-auctions">
-                            <h3>Upcoming Auctions</h3>
-                            <ul>
-                                <li>Auction 7</li>
-                                <li>Auction 8</li>
-                                <li>Auction 9</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
+                </section> --}}
 
                 <section class="dashboard-panel user-section">
                     <p class="eyebrow">Manage account</p>
@@ -81,10 +46,61 @@
                         <input type="password" name="password" id="password"
                             placeholder="Leave blank to keep current password">
                         <div class="button-container">
-                            <button class="button" type="submit" disabled>Update Information</button>
-                            <button class="button delete" type="reset">Delete Account</button>
+                            <button class="button" id="save-button" type="submit" disabled>Update Information</button>
+                            <button class="button delete" id="delete-account-button" type="button">Delete Account</button>
                         </div>
                     </form>
+                </section>
+
+                <section class="dashboard-panel auctions">
+                    <div class="panel-heading">
+                        <div>
+                            <p class="eyebrow">Your activity</p>
+                            <h2>Auctions</h2>
+                        </div>
+                    </div>
+                    <div class="auction-columns">
+                        <div class="auction-list won-auctions">
+                            <h3>Won Auctions</h3>
+                            @if (isset($wonAuctions) && count($wonAuctions) > 0)
+                                <ul>
+                                    @foreach ($wonAuctions as $auction)
+                                        <li>
+                                            <a href="/auction/{{ $auction->id }}">
+                                                #{{ $auction->id }} - {{ $auction->item_name }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <p class="nothing-message">No won auctions.</p>
+                            @endif
+                        </div>
+                        <div class="auction-list active-auctions">
+                            <h3>Active Auctions</h3>
+                            @if (isset($winningAuctions) && count($winningAuctions) > 0)
+                                <ul>
+                                    @foreach ($winningAuctions as $auction)
+                                        <li>
+                                            <a href="/auction/{{ $auction->id }}">
+                                                # {{ $auction->id }} - {{ $auction->item_name }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @elseif (isset($winningAuctions) && count($winningAuctions) === 0)
+                                <p class="nothing-message">No active auctions.</p>
+                            @endif
+                        </div>
+                        {{-- <div class="auction-list upcoming-auctions">
+                            <h3>Upcoming Auctions</h3>
+                            <ul>
+                                <li>Auction 7</li>
+                                <li>Auction 8</li>
+                                <li>Auction 9</li>
+                            </ul>
+                        </div> --}}
+                    </div>
                 </section>
             </div>
         @else

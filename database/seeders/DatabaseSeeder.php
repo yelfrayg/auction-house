@@ -43,6 +43,14 @@ class DatabaseSeeder extends Seeder
                 'item_highest_bid' => 60_000.00,
                 'item_start_time' => now(),
                 'item_end_time' => now()->addHours(10),
+            ], [
+                'item_name' => 'Green School Bus Hot Wheels',
+                'item_description' => 'A classic green school bus, perfect for collectors and enthusiasts.',
+                'item_image_url' => 'img/hw-bus.png',
+                'item_min_price' => 33.00,
+                'item_highest_bid' => 33.00,
+                'item_start_time' => now(),
+                'item_end_time' => now()->addHours(12),
             ]
         ];
 

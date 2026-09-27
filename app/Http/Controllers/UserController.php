@@ -42,7 +42,7 @@ class UserController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->route('dashboard')
+        return redirect()->route('account')
                 ->with('success', 'Account created successfully.'); // Cookie for 1 hour
     }
 

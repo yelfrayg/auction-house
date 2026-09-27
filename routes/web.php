@@ -19,16 +19,6 @@ Route::get('/auction/{slotId}', function ($slotId) {
     return view('auction', ['auction' => $auction]);
 });
 
-Route::post('/auction/{slotId}/bid', function ($slotId) {
-    // 1. Preis updaten
-    // 2. Event an alle Clients senden
-    $update = Item::updateHighestBid($slotId, request('bid_amount'));
-    if ($update) {
-        return redirect()->back()->with('success', 'Your bid has been placed successfully.');
-    }
-    return redirect()->back()->with('failure', 'Your bid has not been placed successfully.');
-})->middleware('auth');
-
 Route::get('/account', function () {
     if (auth()->check()) {
         return view('account');
@@ -52,7 +42,7 @@ Route::post('/login', function () {
         'password.required' => 'Password is required.',
     ]);
 
-    if (auth()->attempt($credentials)) {
+    if (Auth::attempt($credentials)) {
         request()->session()->regenerate();
         return redirect()->intended('/account')->withCookie(cookie('userId', auth()->id(), 60 * 24 * 30))->with('success', 'Logged in successfully.'); // Cookie for 30 days
     }
@@ -72,11 +62,17 @@ Route::middleware('auth')->group(function () {
     })->name('logout');
 
     Route::get('/account', function () {
-        return view('account', ['user' => auth()->user()]);
+        // Find auction by user ID and pass it to the view
+        $winningAuctions = Item::where('user_id', auth()->id())->where('item_end_time', '>', now())->get();
+        $wonAuctions = Item::where('user_id', auth()->id())->where('item_end_time', '<=', now())->get();
+        return view('account', ['user' => auth()->user(), 'winningAuctions' => $winningAuctions, 'wonAuctions' => $wonAuctions]);
     })->name('account');
 
     Route::post('/auction/{slotId}/bid', function ($slotId) {
-        // 1. Preis updaten
-        // 2. Event an alle Clients senden
+        $update = Item::updateHighestBid($slotId, request('bid_amount'));
+        if ($update) {
+            return back()->with('success', 'Your bid has been placed successfully.');
+        }
+        return back()->with('failure', 'Your bid has not been placed successfully.');
     });
 });

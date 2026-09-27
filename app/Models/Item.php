@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Item extends Model
 {
@@ -14,6 +15,7 @@ class Item extends Model
         'item_highest_bid',
         'item_start_time',
         'item_end_time',
+        'user_id'
     ];
 
     protected $casts = [
@@ -38,9 +40,15 @@ class Item extends Model
         $item = self::find($id);
         if ($item) {
             $item->item_highest_bid = $newBid;
+            $item->user_id = auth()->id(); // Update the user_id to the current authenticated user
             $item->save();
             return true;
         }
         return false;
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

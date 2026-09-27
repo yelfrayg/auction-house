@@ -11,7 +11,8 @@
                 <div class="imgcontainer">
                     <img src="{{ asset($auction['item_image_url']) }}" alt="{{ $auction['item_name'] }}">
                     <section class="number-details">
-                        <p class="auction-end-time" data-end-time="{{ date('c', strtotime($auction['item_end_time'])) }}"></p>
+                        <p class="auction-end-time" data-end-time="{{ date('c', strtotime($auction['item_end_time'])) }}">
+                            Waiting...</p>
                         <p class="auction-highest-bid">
                             <span class="highest-bid-label">Highest Bid: </span>
                             <span class="highest-bid-value">
@@ -22,17 +23,19 @@
                 </div>
                 <div class="auction-info">
                     <div class="auction-info-wrapper">
-                        <p class="auction-lot"># {{ $auction['id'] }}</p>
+                        <p class="auction-lot">#{{ $auction['id'] }}</p>
                         <div class="auction-title-viewport">
                             <h1 class="auction-h1" data-title="{{ $auction['item_name'] }}">{{ $auction['item_name'] }}</h1>
                         </div>
                         <p class="auction-description">{{ $auction['item_description'] }}</p>
-                        @if (isset($currentWinner))
-                            <p class="auction-winner">Current Winner: {{ $currentWinner->name }}</p>
-                        @endif
                     </div>
 
                     <div class="buttons">
+                        @if ($auction['user_id'])
+                            <p class="auction-winner">Current Winner: {{ $auction->user->name }}</p>
+                            @else
+                            <p class="auction-winner">No bids yet.</p>
+                        @endif
                         <form action="/auction/{{ $auction['id'] }}/bid" method="POST">
                             @csrf
                             @if (date('c', strtotime($auction['item_end_time'])) < date('c'))
@@ -43,8 +46,14 @@
                                 <button type="submit">Place Bid</button>
                             @endif
                         </form>
-                        @if (isset($success))
-                            <p class="success-message">{{ $success }}</p>
+                        @if (session('success'))
+                            <aside class="bid-messages success">
+                                <x-message text="{{ session('success') }}"/>
+                            </aside>
+                        @elseif (session('failure'))
+                            <aside class="bid-messages failure">
+                                <x-message text="{{ session('failure') }}"/>
+                            </aside>
                         @endif
                     </div>
                 </div>

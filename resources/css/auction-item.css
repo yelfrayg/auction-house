@@ -114,47 +114,78 @@
                 color: var(--color-text-secondary);
                 line-height: 1.6;
             }
+        }
 
-            .buttons,
-            form {
-                width: 100%;
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            .auction-winner {
+                color: var(--color-text-secondary);
+                font-size: 1rem;
+                line-height: 1.6;
             }
+        }
 
-            form {
-                display: flex;
-                gap: 0.75rem;
+        .buttons,
+        form {
+            width: 100%;
+        }
+
+        form {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        input {
+            box-sizing: border-box;
+            min-width: 0;
+            flex: 1;
+            padding: 0.75rem 1rem;
+            background-color: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            color: var(--color-text);
+
+            &:focus {
+                border-color: var(--color-highlight);
+                outline: none;
             }
+        }
 
-            input {
-                box-sizing: border-box;
-                min-width: 0;
-                flex: 1;
-                padding: 0.75rem 0.9rem;
-                background-color: var(--color-bg);
-                border: 1px solid var(--color-border);
-                border-radius: 4px;
-                color: var(--color-text);
-                font: inherit;
+        button {
+            padding: 0.75rem 1rem;
+            border: 0;
+            border-radius: 4px;
+            background-color: var(--color-highlight);
+            color: var(--color-text);
+            cursor: pointer;
+            font: inherit;
 
-                &:focus {
-                    border-color: var(--color-highlight);
-                    outline: none;
-                }
+            &:hover {
+                filter: brightness(1.1);
             }
+        }
 
-            button {
-                padding: 0.75rem 1rem;
-                border: 0;
-                border-radius: 4px;
-                background-color: var(--color-highlight);
-                color: var(--color-text);
-                cursor: pointer;
-                font: inherit;
+        .bid-messages {
+            border-radius: 4px;
+            padding: 0.75rem 1rem;
+            margin-top: 0.75rem;
+            background-color: var(--color-bg);
+            color: var(--color-text);
 
-                &:hover {
-                    filter: brightness(1.1);
-                }
+            .message {
+                border-color: var(--color-success);
             }
+        }
+
+        .bid-messages.success {
+            border-color: var(--color-success);
+        }
+
+        .bid-messages.failure {
+            border-color: var(--color-warning);
         }
     }
 }
