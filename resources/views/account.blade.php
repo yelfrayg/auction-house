@@ -47,7 +47,10 @@
                             placeholder="Leave blank to keep current password">
                         <div class="button-container">
                             <button class="button" id="save-button" type="submit" disabled>Update Information</button>
-                            <button class="button delete" id="delete-account-button" type="button">Delete Account</button>
+                            <form action="/account/delete" method="post">
+                                @csrf
+                                <button class="button delete" id="delete-account-button" type="submit">Delete Account</button>
+                            </form>
                         </div>
                     </form>
                 </section>

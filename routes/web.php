@@ -70,11 +70,16 @@ Route::middleware('auth')->group(function () {
     })->name('account');
 
     Route::post('/auction/{slotId}/bid', function ($slotId) {
-        $update = Item::updateHighestBid($slotId, request('bid_amount'));
-        if ($update) {
-            return back()->with('success', 'Your bid has been placed successfully.');
+        try {
+            $update = Item::updateHighestBid($slotId, request('bid_amount'));
+            if ($update['code'] === 200) {
+                return back()->with('success', $update['message']);
+            }
+            return back()->with('failure', $update['message']);
+        } catch (Exception $e) {
+            return back()->with('failure', 'An error occurred while placing your bid. Please try again.');
         }
-        return back()->with('failure', 'Your bid has not been placed successfully.');
+
     });
 
     Route::post('/account/delete', function () {

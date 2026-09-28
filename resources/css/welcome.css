@@ -1,0 +1,94 @@
+.welcome-hero {
+    display: flex;
+    align-items: center;
+    min-height: 32rem;
+    width: 80%;
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 4rem 0;
+    box-sizing: border-box;
+}
+
+.welcome-content {
+    max-width: 42rem;
+}
+
+.welcome-eyebrow {
+    color: var(--color-highlight);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+}
+
+.welcome-hero h1 {
+    color: var(--color-text);
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    line-height: 0.98;
+    margin: 0 0 1.5rem;
+    padding: 0;
+    text-align: left;
+}
+
+.welcome-intro {
+    color: var(--color-text-secondary);
+    font-size: 1.2rem;
+    line-height: 1.6;
+    max-width: 32rem;
+}
+
+.welcome-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+.welcome-button {
+    border: 1px solid var(--color-highlight);
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 0.85rem 1.1rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.welcome-button-primary {
+    background-color: var(--color-highlight);
+    color: #16232a;
+}
+
+.welcome-button-primary:hover {
+    background-color: #ff7a36;
+}
+
+.welcome-button-secondary {
+    color: var(--color-text);
+}
+
+.welcome-button-secondary:hover {
+    background-color: var(--color-bg-light);
+}
+
+@media (max-width: 600px) {
+    .welcome-hero {
+        min-height: 28rem;
+        width: 88%;
+        padding: 3rem 0;
+    }
+
+    .welcome-intro {
+        font-size: 1.05rem;
+    }
+
+    .welcome-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .welcome-button {
+        text-align: center;
+    }
+}

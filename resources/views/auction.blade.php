@@ -31,14 +31,13 @@
                     </div>
 
                     <div class="buttons">
-                        @if (!date('c', strtotime($auction['item_end_time'])) >= date('c'))
+                        @if (date('c', strtotime($auction['item_end_time'])) >= date('c'))
                             @if ($auction['user_id'])
                                 <p class="auction-winner">Current Winner: {{ $auction->user->name }}</p>
                             @else
                                 <p class="auction-winner">No bids yet.</p>
                             @endif
                         @endif
-
                         <form action="/auction/{{ $auction['id'] }}/bid" method="POST">
                             @csrf
                             @if (date('c', strtotime($auction['item_end_time'])) < date('c'))

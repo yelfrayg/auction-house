@@ -1,9 +1,10 @@
-@import "header.css";
-@import "index.css";
-@import "auction-item.css";
-@import "footer.css";
-@import "auth.css";
-@import "dashboard.css";
+@import "./header.css";
+@import "./index.css";
+@import "./welcome.css";
+@import "./auction-item.css";
+@import "./footer.css";
+@import "./auth.css";
+@import "./dashboard.css";
 
 :root {
     --color-bg: #16232a;

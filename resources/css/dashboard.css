@@ -189,6 +189,7 @@ body {
 }
 
 .button-container {
+    width: 100%;
     display: flex;
     justify-content: flex-start;
     gap: 0.5rem;

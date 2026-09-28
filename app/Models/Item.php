@@ -38,13 +38,13 @@ class Item extends Model
     public static function updateHighestBid($id, $newBid)
     {
         $item = self::find($id);
-        if ($item) {
+        if ($item && $newBid > $item->item_highest_bid) {
             $item->item_highest_bid = $newBid;
             $item->user_id = auth()->id(); // Update the user_id to the current authenticated user
             $item->save();
-            return true;
+            return ['code' => 200, 'message' => 'Bid updated successfully.'];
         }
-        return false;
+        return ['code' => 400, 'message' => 'Current highest bid is higher than your bid.'];
     }
 
     public function user(): BelongsTo

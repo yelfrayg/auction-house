@@ -26,11 +26,4 @@ document.addEventListener("DOMContentLoaded", () => {
     emailField.addEventListener("input", checkForChanges);
     nameField.addEventListener("input", checkForChanges);
     passwordField.addEventListener("input", checkForChanges);
-
-    deleteAccountButton.addEventListener("click", () => {
-        if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
-            // TODO
-            console.log("Redirecting to account deletion route...");
-        }
-    });
 })
